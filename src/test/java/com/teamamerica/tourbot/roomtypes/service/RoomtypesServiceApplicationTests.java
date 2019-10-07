@@ -20,24 +20,26 @@ import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
 import com.teamamerica.tourbot.roomtypes.service.service.RoomTypeService;
 import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class RoomtypesServiceApplicationTests {
+public class RoomtypesServiceApplicationTests {
 
 	@Autowired
-	RoomTypeController roomTypeController;
+	private RoomTypeController roomTypeController;
 
 	@Autowired
 	private RoomTypeService roomTypeService;
 
 	@Test
-	void contextLoads() throws Exception {
+	public void contextLoads() throws Exception {
 
 		Assert.assertNotNull(roomTypeController);
 	}
