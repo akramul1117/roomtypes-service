@@ -51,7 +51,7 @@ public class RoomTypesRepository {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
-    private static  final String ROOM_TYPE_BASE_QUERY="SELECT RoomTypeID,RoomType,DateUpdated,deleted,HiltonRoomTypeId,HiltonHotelCodes,externalRoomTypeId FROM tblRoomTypes";
+    private static  final String ROOM_TYPE_BASE_QUERY="SELECT RoomTypeID,RoomType,DateUpdated,deleted,HiltonRoomTypeId,HiltonHotelCodes,externalRoomTypeId FROM tblRoomTypes ";
     private static  final String ROOM_TYPE_LIST_QUERY="SELECT RoomTypeID,RoomType FROM tblRoomTypes";
     private static final String SELECTED_BY_ID = " WHERE RoomTypeID= :roomTypeID";
 

@@ -41,8 +41,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-@RestController
 @CrossOrigin
+@RestController
 @RequestMapping(value ="/roomTypes")
 public class RoomTypeController {
 

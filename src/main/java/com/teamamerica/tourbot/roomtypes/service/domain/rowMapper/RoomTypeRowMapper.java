@@ -39,9 +39,9 @@ public class RoomTypeRowMapper implements RowMapper<RoomType> {
         roomType.setRoomType(rs.getString("RoomType"));
         roomType.setDateUpdated(rs.getString("DateUpdated"));
         roomType.setDeleted(rs.getBoolean("deleted"));
-        roomType.setHiltonRoomTypeId(rs.getInt("HiltonRoomTypeId"));
-        roomType.setHiltonHotelCodes(rs.getInt("HiltonHotelCodes"));
-        roomType.setExternalRoomTypeId(rs.getInt("externalRoomTypeId"));
+        roomType.setHiltonRoomTypeId(rs.getString("HiltonRoomTypeId"));
+        roomType.setHiltonHotelCodes(rs.getString("HiltonHotelCodes"));
+        roomType.setExternalRoomTypeId(rs.getString("externalRoomTypeId"));
 
         return roomType;
     }

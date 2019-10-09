@@ -36,11 +36,11 @@ public class RoomType {
     @JsonProperty("dateUpdated")
     private String dateUpdated;
     @JsonProperty("hiltonRoomTypeId")
-    private int hiltonRoomTypeId;
+    private String hiltonRoomTypeId;
     @JsonProperty("hiltonHotelCodes")
-    private int hiltonHotelCodes;
+    private String hiltonHotelCodes;
     @JsonProperty("externalRoomTypeId")
-    private int externalRoomTypeId;
+    private String externalRoomTypeId;
     @JsonProperty("deleted")
     private boolean deleted;
 
@@ -68,27 +68,27 @@ public class RoomType {
         this.dateUpdated = dateUpdated;
     }
 
-    public int getHiltonRoomTypeId() {
+    public String getHiltonRoomTypeId() {
         return hiltonRoomTypeId;
     }
 
-    public void setHiltonRoomTypeId(int hiltonRoomTypeId) {
+    public void setHiltonRoomTypeId(String hiltonRoomTypeId) {
         this.hiltonRoomTypeId = hiltonRoomTypeId;
     }
 
-    public int getHiltonHotelCodes() {
+    public String getHiltonHotelCodes() {
         return hiltonHotelCodes;
     }
 
-    public void setHiltonHotelCodes(int hiltonHotelCodes) {
+    public void setHiltonHotelCodes(String hiltonHotelCodes) {
         this.hiltonHotelCodes = hiltonHotelCodes;
     }
 
-    public int getExternalRoomTypeId() {
+    public String getExternalRoomTypeId() {
         return externalRoomTypeId;
     }
 
-    public void setExternalRoomTypeId(int externalRoomTypeId) {
+    public void setExternalRoomTypeId(String externalRoomTypeId) {
         this.externalRoomTypeId = externalRoomTypeId;
     }
 
@@ -99,7 +99,6 @@ public class RoomType {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-
 
     @Override
     public String toString() {
