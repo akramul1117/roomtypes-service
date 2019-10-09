@@ -64,9 +64,9 @@ public class RoomtypesServiceApplicationTests {
 		RoomType roomType = new RoomType();
 		roomType.setRoomType("Test Room Type");
 		roomType.setDeleted(false);
-		roomType.setExternalRoomTypeId(0);
-		roomType.setHiltonHotelCodes(0);
-		roomType.setHiltonRoomTypeId(0);
+		roomType.setExternalRoomTypeId("");
+		roomType.setHiltonHotelCodes("");
+		roomType.setHiltonRoomTypeId("");
 
 		//test insert
 		roomType.setRoomTypeId(roomTypeService.insertItem(roomType));;
