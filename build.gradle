@@ -41,5 +41,6 @@ dependencies {
 	compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.10.0'
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
 	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.10'
+	compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
 }
 

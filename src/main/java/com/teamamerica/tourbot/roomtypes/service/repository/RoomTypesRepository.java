@@ -28,6 +28,7 @@ import com.teamamerica.tourbot.roomtypes.service.domain.rowMapper.RoomTypeDtoRow
 import com.teamamerica.tourbot.roomtypes.service.domain.rowMapper.RoomTypeRowMapper;
 import com.teamamerica.tourbot.roomtypes.service.logger.Loggable;
 import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -152,7 +153,7 @@ public class RoomTypesRepository {
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-        parameterSource.addValue("roomType",roomType.getRoomType());
+        parameterSource.addValue("roomType", StringEscapeUtils.escapeHtml4(roomType.getRoomType()));
         parameterSource.addValue("hiltonRoomTypeId",roomType.getHiltonRoomTypeId());
         parameterSource.addValue("hiltonHotelCodes",roomType.getHiltonHotelCodes());
         parameterSource.addValue("externalRoomTypeId",roomType.getExternalRoomTypeId());
@@ -180,7 +181,7 @@ public class RoomTypesRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
         parameterSource.addValue("roomTypeID",roomType.getRoomTypeId());
-        parameterSource.addValue("roomType",roomType.getHiltonRoomTypeId());
+        parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType.getRoomType()));
         parameterSource.addValue("deleted",roomType.isDeleted() ? 1 : 0 );
         parameterSource.addValue("hiltonRoomTypeId",roomType.getHiltonRoomTypeId());
         parameterSource.addValue("hiltonHotelCodes",roomType.getHiltonHotelCodes());

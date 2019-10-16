@@ -23,6 +23,8 @@ public class RoomTypeUtils {
     public static final String REDIS_KEY_AGENT_OPTIONS_LIST="FULL_AGENT_CODE_LIST";
     public static final String DATE_FORMATTER ="yyyy-MM-dd HH:mm:ss";
     public static final String DATA_MODIFIED_SUCCESSFULLY ="Data Modified Successfully!";
+    public static final String VALIDATION_FAILED = "Validation Failed";
+
     public static long getCacheExpireTime(){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE,7);

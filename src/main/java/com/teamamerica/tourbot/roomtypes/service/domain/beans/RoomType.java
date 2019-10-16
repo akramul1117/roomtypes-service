@@ -23,24 +23,31 @@ package com.teamamerica.tourbot.roomtypes.service.domain.beans;/*
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class RoomType {
 
     @JsonProperty("roomTypeId")
     private int roomTypeId;
+    @NotNull
     @JsonProperty("roomType")
-    @Size(min = 4, message = "MealPlan should have atleast 4  characters!!")
+    @Size(min = 4, max = 250, message = "MealPlan should be between 4 and 250 characters!!")
     private String RoomType;
     @JsonProperty("dateUpdated")
     private String dateUpdated;
     @JsonProperty("hiltonRoomTypeId")
+    @Value("")
     private String hiltonRoomTypeId;
     @JsonProperty("hiltonHotelCodes")
+    @Value("")
     private String hiltonHotelCodes;
     @JsonProperty("externalRoomTypeId")
+    @Value("")
     private String externalRoomTypeId;
+    @Value("false")
     @JsonProperty("deleted")
     private boolean deleted;
 

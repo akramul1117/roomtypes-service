@@ -20,6 +20,7 @@ package com.teamamerica.tourbot.roomtypes.service.exceptionHandler;
 
 import com.teamamerica.tourbot.roomtypes.service.exception.DataNotFoundException;
 import com.teamamerica.tourbot.roomtypes.service.exception.ExceptionResponse;
+import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -69,14 +70,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), ex.getBindingResult().toString());
-
-        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
-
-
+    protected final ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), RoomTypeUtils.VALIDATION_FAILED, ex.getBindingResult().getAllErrors().toString());
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
 
