@@ -30,12 +30,12 @@ import javax.validation.constraints.Size;
 
 public class RoomType {
 
-    @JsonProperty("roomTypeId")
+    @JsonProperty("RoomTypeId")
     private int roomTypeId;
     @NotNull
-    @JsonProperty("roomType")
+    @JsonProperty("RoomType")
     @Size(min = 4, max = 250, message = "MealPlan should be between 4 and 250 characters!!")
-    private String RoomType;
+    private String roomType;
     @JsonProperty("dateUpdated")
     private String dateUpdated;
     @JsonProperty("hiltonRoomTypeId")
@@ -60,11 +60,11 @@ public class RoomType {
     }
 
     public String getRoomType() {
-        return RoomType;
+        return roomType;
     }
 
     public void setRoomType(String roomType) {
-        RoomType = roomType;
+        roomType = roomType;
     }
 
     public String getDateUpdated() {
@@ -111,7 +111,7 @@ public class RoomType {
     public String toString() {
         return "RoomType{" +
                 "roomTypeId=" + roomTypeId +
-                ", RoomType='" + RoomType + '\'' +
+                ", RoomType='" + roomType + '\'' +
                 ", dateUpdated='" + dateUpdated + '\'' +
                 ", hiltonRoomTypeId=" + hiltonRoomTypeId +
                 ", hiltonHotelCodes=" + hiltonHotelCodes +
