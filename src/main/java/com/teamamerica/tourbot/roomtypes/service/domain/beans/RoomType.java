@@ -64,7 +64,7 @@ public class RoomType {
     }
 
     public void setRoomType(String roomType) {
-        roomType = roomType;
+        this.roomType = roomType;
     }
 
     public String getDateUpdated() {
