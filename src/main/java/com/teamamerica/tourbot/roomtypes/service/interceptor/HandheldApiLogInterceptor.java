@@ -35,16 +35,16 @@ public class HandheldApiLogInterceptor implements HandlerInterceptor {
     @Loggable
     private Logger logger;
 
-    /*ClassLoader classLoader = getClass().getClassLoader();
+    ClassLoader classLoader = getClass().getClassLoader();
     File fireBaseJson = new File(classLoader.getResource("tourbotapi-firebase-adminsdk-0m5bp-1dedae8d10.json").getFile());
-*//*
+
     private FileInputStream serviceAccount = new FileInputStream(fireBaseJson);
     private FirebaseOptions options = new FirebaseOptions.Builder()
             .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-            .build();*/
+            .build();
 
     public HandheldApiLogInterceptor() throws IOException {
-        //FirebaseApp.initializeApp(options);
+        FirebaseApp.initializeApp(options);
     }
 
 
@@ -57,14 +57,14 @@ public class HandheldApiLogInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        /*Boolean checkRevoked=true;
+        Boolean checkRevoked=true;
         String token=request.getHeader("x-oauth-token");
         if(token==null){
             throw new RuntimeException(MealPlanUtils.INCORRECT_REQUEST);
-        }*/
+        }
 
 
-      //  FirebaseToken decodedToken= FirebaseAuth.getInstance().verifyIdTokenAsync(token,checkRevoked).get();
+        FirebaseToken decodedToken= FirebaseAuth.getInstance().verifyIdTokenAsync(token,checkRevoked).get();
 
 //        UserRecord userRecord= FirebaseAuth.getInstance().getUserAsync(decodedToken.getUid()).get();
 //        System.out.println(userRecord.getTokensValidAfterTimestamp());
