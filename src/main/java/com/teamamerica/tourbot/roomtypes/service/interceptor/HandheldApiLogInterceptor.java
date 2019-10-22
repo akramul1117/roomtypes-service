@@ -16,7 +16,13 @@ package com.teamamerica.tourbot.roomtypes.service.interceptor;
 
 
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseToken;
 import com.teamamerica.tourbot.roomtypes.service.logger.Loggable;
+import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,6 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,7 +68,7 @@ public class HandheldApiLogInterceptor implements HandlerInterceptor {
         Boolean checkRevoked=true;
         String token=request.getHeader("x-oauth-token");
         if(token==null){
-            throw new RuntimeException(MealPlanUtils.INCORRECT_REQUEST);
+            throw new RuntimeException(RoomTypeUtils.INCORRECT_REQUEST);
         }
 
 
