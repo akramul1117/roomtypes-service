@@ -24,11 +24,14 @@ package com.teamamerica.tourbot.roomtypes.service.service;/*
 
 import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
+import com.teamamerica.tourbot.roomtypes.service.exception.DataNotFoundException;
+import com.teamamerica.tourbot.roomtypes.service.exception.InvalidDataException;
 import com.teamamerica.tourbot.roomtypes.service.repository.RoomTypesRepository;
 import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 
@@ -50,14 +53,25 @@ public class RoomTypeService {
 
         }
 
+        List<RoomType> roomTypeList = roomTypesRepository.list((page - 1) * limit, limit, filterByClause, parameterSource);
 
-        return roomTypesRepository.list((page-1)*limit,limit,filterByClause,parameterSource);
+        if(roomTypeList.size() ==0) {
+            throw new DataNotFoundException("Data Not found");
+        }
+
+        return roomTypeList;
 
     }
 
     public List<RoomTypeDto> getAllRoomTypeList() {
 
-       return roomTypesRepository.getAllRoomTypeList();
+        List<RoomTypeDto> roomTypeList = roomTypesRepository.getAllRoomTypeList();
+
+        if(roomTypeList.size() ==0) {
+            throw new DataNotFoundException("Data Not found");
+        }
+
+       return roomTypeList;
     }
 
     public RoomType getItemById(int id) {
@@ -67,12 +81,26 @@ public class RoomTypeService {
 
     public int insertItem(RoomType roomType) {
 
+        if(!roomTypesRepository.checkRoomTypeAvailability(roomType.getRoomType(),0)){
+            throw new InvalidDataException("Duplicate values not allowed for RoomType!");
+        }
+
         return roomTypesRepository.insetItem(roomType);
     }
 
     public int updateItem(RoomType roomType) {
 
-        return roomTypesRepository.updateItem(roomType);
+        if(!roomTypesRepository.checkRoomTypeAvailability(roomType.getRoomType(),roomType.getRoomTypeId())){
+            throw new InvalidDataException("Duplicate values not allowed for RoomType!");
+        }
+
+        int result = roomTypesRepository.updateItem(roomType);
+
+        if(result ==0) {
+            throw new DataNotFoundException("Data Not found id: " +roomType.getRoomTypeId());
+        }
+
+        return result;
     }
 
     public int deleteItemById(int id) {
@@ -91,5 +119,9 @@ public class RoomTypeService {
 
     public String getFilteredUserNumber(String filterByClause) {
         return roomTypesRepository.getFilteredUserNumber(filterByClause);
+    }
+
+    public Boolean checkRoomTypeAvailability(String roomType) {
+        return roomTypesRepository.checkRoomTypeAvailability(roomType,-1);
     }
 }

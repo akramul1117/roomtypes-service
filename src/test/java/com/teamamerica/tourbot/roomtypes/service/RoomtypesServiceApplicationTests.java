@@ -45,17 +45,24 @@ public class RoomtypesServiceApplicationTests {
 	}
 
 	@Test
-	public void test_checkRoomTypeAvailability() {
+	public void test_list() {
 		List<RoomType> roomtypeList = roomTypeService.list(1,10, RoomTypeUtils.EMPTY_STRING);
 
 		Assert.assertFalse(roomtypeList.size()==0 );
 	}
 
 	@Test
-	public void test_checkRoomTypeListAvailability() {
-		List<RoomTypeDto> mealPlanList = roomTypeService.getAllRoomTypeList();
+	public void test_getAllRoomTypeList() {
+		List<RoomTypeDto> roomTypeList = roomTypeService.getAllRoomTypeList();
 
-		Assert.assertFalse(mealPlanList.size()==0 );
+		Assert.assertFalse(roomTypeList.size()==0 );
+	}
+
+	@Test
+	public void test_checkRoomTypeAvailability() {
+		Boolean result = roomTypeService.checkRoomTypeAvailability("TEST_111_XXX_111");
+
+		Assert.assertTrue(result);
 	}
 
 

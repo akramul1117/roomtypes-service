@@ -54,37 +54,33 @@ public class RoomTypeController {
     @GetMapping(value = "/list")
     public ResponseEntity<List<RoomType>> list(@RequestParam(defaultValue ="1" ) int page, @RequestParam(defaultValue ="25" ) int limit, @RequestParam(defaultValue ="" )String filterByRoomType){
 
-        List<RoomType> mealPlanList = roomTypeService.list(page, limit, filterByRoomType);
 
-        if(mealPlanList.size() ==0) {
-            throw new DataNotFoundException("Data Not found");
-        }
 
-        return ResponseEntity.ok(mealPlanList);
+        return ResponseEntity.ok(roomTypeService.list(page, limit, filterByRoomType));
     }
 
     @GetMapping (value = "/roomTypeList")
     public ResponseEntity<List<RoomTypeDto>> getAllRoomTypeList(){
 
-
-        List<RoomTypeDto> mealPlanList = roomTypeService.getAllRoomTypeList();
-
-        if(mealPlanList.size() ==0) {
-            throw new DataNotFoundException("Data Not found");
-        }
-
-        return ResponseEntity.ok(mealPlanList);
+        return ResponseEntity.ok(roomTypeService.getAllRoomTypeList());
     }
 
 
+    @GetMapping (value = "checkRoomTypeAvailability/{roomType}")
+    public ResponseEntity<Boolean> checkRoomTypeAvailability(@PathVariable(name ="roomType" )String roomType){
+
+
+
+        return ResponseEntity.ok(roomTypeService.checkRoomTypeAvailability(roomType));
+    }
 
 
     @GetMapping (value = "/{id}")
     public ResponseEntity<RoomType> getItemById(@PathVariable(name ="id" )int id){
 
-        RoomType mealPlan = roomTypeService.getItemById(id);
+        RoomType roomType = roomTypeService.getItemById(id);
 
-        return ResponseEntity.ok(mealPlan);
+        return ResponseEntity.ok(roomType);
     }
 
     @PostMapping(value = "")
@@ -101,10 +97,6 @@ public class RoomTypeController {
     public ResponseEntity<Object> updateItem(@Valid @RequestBody RoomType roomType){
 
         int result = roomTypeService.updateItem(roomType);
-
-        if(result ==0) {
-            throw new DataNotFoundException("Data Not found id: " +roomType.getRoomTypeId());
-        }
 
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(roomType.getRoomTypeId()).toUri();

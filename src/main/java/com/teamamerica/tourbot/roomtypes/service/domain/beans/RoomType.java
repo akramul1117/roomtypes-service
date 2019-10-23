@@ -34,7 +34,7 @@ public class RoomType {
     private int roomTypeId;
     @NotNull
     @JsonProperty("RoomType")
-    @Size(min = 4, max = 250, message = "MealPlan should be between 4 and 250 characters!!")
+    @Size(min = 4, max = 250, message = "RoomType should be between 4 and 250 characters!!")
     private String roomType;
     @JsonProperty("dateUpdated")
     private String dateUpdated;

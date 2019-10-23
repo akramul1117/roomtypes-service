@@ -54,7 +54,7 @@ public class RoomTypesRepository {
 
     private static  final String ROOM_TYPE_BASE_QUERY="SELECT RoomTypeID,RoomType,DateUpdated,deleted,HiltonRoomTypeId,HiltonHotelCodes,externalRoomTypeId FROM tblRoomTypes ";
     private static  final String ROOM_TYPE_LIST_QUERY="SELECT RoomTypeID,RoomType FROM tblRoomTypes";
-    private static final String SELECTED_BY_ID = " WHERE RoomTypeID= :roomTypeID";
+    private static final String ROOM_TYPE_SELECTED_BY_ID = " WHERE RoomTypeID= :roomTypeID";
 
     private static final String ROW_LIMIT_PART = " LIMIT :limit OFFSET :offset";
 
@@ -67,6 +67,12 @@ public class RoomTypesRepository {
     private static final String ROOM_TYPE_BASE_UPDATE_QUERY ="UPDATE tblRoomTypes SET RoomType=:roomType, DateUpdated=:currentDate, deleted=:deleted, HiltonRoomTypeId=:hiltonRoomTypeId,HiltonHotelCodes=:hiltonHotelCodes,externalRoomTypeId=:externalRoomTypeId";
 
     private static final String ROOM_TYPE_COUNT_QUERY="SELECT COUNT('RoomTypeID') FROM tblRoomTypes ";
+
+    private static final String ROOM_TYPE_WHERE_LIKE_QUERY="WHERE RoomType LIKE :roomType ";
+
+    private static final String ROOM_TYPE_WHERE_EXACT_MATCH_QUERY="WHERE RoomType =:roomType ";
+
+    private static final String ROOM_TYPE_AND_ID_QUERY="AND RoomTypeID<> :roomTypeID ";
 
 
     public List<RoomType> list(int offset, int limit, String filterByClause, MapSqlParameterSource parameterSource) {
@@ -99,7 +105,7 @@ public class RoomTypesRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("roomTypeID",id);
 
-        query =ROOM_TYPE_BASE_QUERY + SELECTED_BY_ID;
+        query =ROOM_TYPE_BASE_QUERY + ROOM_TYPE_SELECTED_BY_ID;
 
         return namedParameterJdbcTemplate.queryForObject(query,parameterSource,new RoomTypeRowMapper());
     }
@@ -111,7 +117,7 @@ public class RoomTypesRepository {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("roomTypeID",id);
 
-        query =ROOM_TYPE_DELETE_QUERY + SELECTED_BY_ID;
+        query =ROOM_TYPE_DELETE_QUERY + ROOM_TYPE_SELECTED_BY_ID;
 
         return  namedParameterJdbcTemplate.update(query,parameterSource);
     }
@@ -195,8 +201,39 @@ public class RoomTypesRepository {
         parameterSource.addValue("currentDate",dateFormat.format(date) );
 
 
-        query =ROOM_TYPE_BASE_UPDATE_QUERY + SELECTED_BY_ID;
+        query =ROOM_TYPE_BASE_UPDATE_QUERY + ROOM_TYPE_SELECTED_BY_ID;
 
         return namedParameterJdbcTemplate.update(query,parameterSource);
+    }
+
+    public Boolean checkRoomTypeAvailability(String roomType, int id) {
+
+        String query = RoomTypeUtils.EMPTY_STRING;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        switch (id){
+            case -1:
+                parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType)+"%");
+                query = ROOM_TYPE_COUNT_QUERY + ROOM_TYPE_WHERE_LIKE_QUERY;
+                break;
+            case 0 :
+                parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType));
+                query = ROOM_TYPE_COUNT_QUERY + ROOM_TYPE_WHERE_EXACT_MATCH_QUERY;
+                break;
+
+            default:
+                parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType));
+                parameterSource.addValue("roomTypeID",id);
+                query = ROOM_TYPE_COUNT_QUERY + ROOM_TYPE_WHERE_EXACT_MATCH_QUERY  + ROOM_TYPE_AND_ID_QUERY ;
+
+
+        }
+
+        int count = namedParameterJdbcTemplate.queryForObject(query,parameterSource,Integer.class);
+
+        if(count >0) {
+            return false;
+        }
+
+        return true;
     }
 }

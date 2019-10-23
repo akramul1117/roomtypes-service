@@ -20,6 +20,7 @@ package com.teamamerica.tourbot.roomtypes.service.exceptionHandler;
 
 import com.teamamerica.tourbot.roomtypes.service.exception.DataNotFoundException;
 import com.teamamerica.tourbot.roomtypes.service.exception.ExceptionResponse;
+import com.teamamerica.tourbot.roomtypes.service.exception.InvalidDataException;
 import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -40,6 +41,16 @@ import java.util.Date;
 @ControllerAdvice
 @RestController
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+
+    @ExceptionHandler(InvalidDataException.class)
+    public final ResponseEntity<Object> invalidDataExceptions(Exception ex, WebRequest request) {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+
+    }
 
 
     @ExceptionHandler(DataNotFoundException.class)
