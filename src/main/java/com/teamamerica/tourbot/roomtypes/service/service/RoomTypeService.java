@@ -23,6 +23,7 @@ package com.teamamerica.tourbot.roomtypes.service.service;/*
  */
 
 import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
+import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeCSVDto;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
 import com.teamamerica.tourbot.roomtypes.service.exception.DataNotFoundException;
 import com.teamamerica.tourbot.roomtypes.service.exception.InvalidDataException;
@@ -123,5 +124,9 @@ public class RoomTypeService {
 
     public Boolean checkRoomTypeAvailability(String roomType) {
         return roomTypesRepository.checkRoomTypeAvailability(roomType,-1);
+    }
+
+    public List<RoomTypeCSVDto> listForCSV() {
+        return roomTypesRepository.listForCSV();
     }
 }

@@ -23,7 +23,9 @@ package com.teamamerica.tourbot.roomtypes.service.repository;/*
  */
 
 import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
+import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeCSVDto;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
+import com.teamamerica.tourbot.roomtypes.service.domain.rowMapper.RoomTypeCSVDtoRowMapper;
 import com.teamamerica.tourbot.roomtypes.service.domain.rowMapper.RoomTypeDtoRowMapper;
 import com.teamamerica.tourbot.roomtypes.service.domain.rowMapper.RoomTypeRowMapper;
 import com.teamamerica.tourbot.roomtypes.service.logger.Loggable;
@@ -73,6 +75,8 @@ public class RoomTypesRepository {
     private static final String ROOM_TYPE_WHERE_EXACT_MATCH_QUERY="WHERE RoomType =:roomType ";
 
     private static final String ROOM_TYPE_AND_ID_QUERY="AND RoomTypeID<> :roomTypeID ";
+
+    private static final String ROOM_TYPE_CSV_GET_QUERY = "SELECT RoomTypeId, RoomType FROM tblRoomTypes WHERE deleted = :deleted ORDER BY RoomTypeId ASC ";
 
 
     public List<RoomType> list(int offset, int limit, String filterByClause, MapSqlParameterSource parameterSource) {
@@ -235,5 +239,9 @@ public class RoomTypesRepository {
         }
 
         return true;
+    }
+
+    public List<RoomTypeCSVDto> listForCSV() {
+        return namedParameterJdbcTemplate.query(ROOM_TYPE_CSV_GET_QUERY,new MapSqlParameterSource().addValue("deleted",0), new RoomTypeCSVDtoRowMapper());
     }
 }

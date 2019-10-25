@@ -23,6 +23,7 @@ package com.teamamerica.tourbot.roomtypes.service.controller;/*
  */
 
 import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
+import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeCSVDto;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
 import com.teamamerica.tourbot.roomtypes.service.domain.pagination.DataTableRequest;
 import com.teamamerica.tourbot.roomtypes.service.domain.pagination.DataTableResults;
@@ -114,6 +115,15 @@ public class RoomTypeController {
         }
 
         return  ResponseEntity.ok("Delete Successful");
+    }
+
+    @GetMapping(value = "/csv_list")
+    public  ResponseEntity<Object> listForCSV(){
+        List<RoomTypeCSVDto> roomTypeCSVDtoList = roomTypeService.listForCSV();
+        if(roomTypeCSVDtoList.size() == 0){
+            throw new DataNotFoundException("Data Not Found");
+        }
+        return ResponseEntity.ok(roomTypeCSVDtoList);
     }
 
 

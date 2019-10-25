@@ -17,6 +17,7 @@ package com.teamamerica.tourbot.roomtypes.service;
 import com.teamamerica.tourbot.roomtypes.service.controller.RoomTypeController;
 
 import com.teamamerica.tourbot.roomtypes.service.domain.beans.RoomType;
+import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeCSVDto;
 import com.teamamerica.tourbot.roomtypes.service.domain.dto.RoomTypeDto;
 import com.teamamerica.tourbot.roomtypes.service.service.RoomTypeService;
 import com.teamamerica.tourbot.roomtypes.service.utils.RoomTypeUtils;
@@ -47,8 +48,10 @@ public class RoomtypesServiceApplicationTests {
 	@Test
 	public void test_list() {
 		List<RoomType> roomtypeList = roomTypeService.list(1,10, RoomTypeUtils.EMPTY_STRING);
+		List<RoomTypeCSVDto> roomTypeCSVDtoList = roomTypeService.listForCSV();
 
 		Assert.assertFalse(roomtypeList.size()==0 );
+		Assert.assertNotEquals(0, roomTypeCSVDtoList.size());
 	}
 
 	@Test
