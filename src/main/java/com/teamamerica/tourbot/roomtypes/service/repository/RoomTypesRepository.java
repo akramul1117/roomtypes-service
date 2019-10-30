@@ -217,7 +217,7 @@ public class RoomTypesRepository {
         switch (id){
             case -1:
                 parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType)+"%");
-                query = ROOM_TYPE_COUNT_QUERY + ROOM_TYPE_WHERE_LIKE_QUERY;
+                query = ROOM_TYPE_COUNT_QUERY + ROOM_TYPE_WHERE_EXACT_MATCH_QUERY;
                 break;
             case 0 :
                 parameterSource.addValue("roomType",StringEscapeUtils.escapeHtml4(roomType));
