@@ -40,9 +40,9 @@ import java.util.Date;
 @Component
 public class HandheldApiLogInterceptor implements HandlerInterceptor {
 
-    @Loggable
-    private Logger logger;
 
+    private Logger logger;
+/*@Loggable
     ClassLoader classLoader = getClass().getClassLoader();
     File fireBaseJson = new File(classLoader.getResource("tourbotapi-firebase-adminsdk-0m5bp-1dedae8d10.json").getFile());
 
@@ -54,13 +54,13 @@ public class HandheldApiLogInterceptor implements HandlerInterceptor {
     public HandheldApiLogInterceptor() throws IOException {
         FirebaseApp.initializeApp(options);
     }
-
+*/
 
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object o) throws Exception {
 
-        if(request.getMethod().equals("OPTIONS")){
+       /* if(request.getMethod().equals("OPTIONS")){
 
             return true;
         }
@@ -73,7 +73,7 @@ public class HandheldApiLogInterceptor implements HandlerInterceptor {
 
 
         FirebaseToken decodedToken= FirebaseAuth.getInstance().verifyIdTokenAsync(token,checkRevoked).get();
-
+*/
 //        UserRecord userRecord= FirebaseAuth.getInstance().getUserAsync(decodedToken.getUid()).get();
 //        System.out.println(userRecord.getTokensValidAfterTimestamp());
 
