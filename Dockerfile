@@ -11,7 +11,7 @@ VOLUME /tmp
 EXPOSE 8080
 
 # The application's jar file
-ARG JAR_FILE=target/gs-spring-boot-docker-0.1.0.jar
+ARG JAR_FILE=https://github.com/akramul1117/gs-spring-boot-docker/blob/master/target/gs-spring-boot-docker-0.1.0.jar
 
 # Add the application's jar to the container
 ADD ${JAR_FILE} app.jar
