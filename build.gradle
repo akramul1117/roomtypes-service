@@ -36,13 +36,13 @@ repositories {
 	maven { url 'https://repo.spring.io/milestone' }
 }
 
-apply plugin: 'war'
+/*apply plugin: 'war'
 
 war {
 	enabled = true
 	archiveName('roomtype-service.war')
 
-}
+}*/
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -51,7 +51,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	runtimeOnly 'mysql:mysql-connector-java'
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	/*providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')*/
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	compile group: 'com.google.firebase', name: 'firebase-admin', version: '6.10.0'
