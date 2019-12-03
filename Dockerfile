@@ -15,6 +15,7 @@ RUN wget ftp://dhaka:1234@192.168.0.104/roomtypes-service.jar
 # The application's jar file
 ARG JAR_FILE=roomtypes-service.jar
 
+RUN ls
 
 # Add the application's jar to the container
 ADD ${JAR_FILE} app.jar
