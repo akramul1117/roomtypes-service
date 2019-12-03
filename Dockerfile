@@ -10,7 +10,7 @@ VOLUME /tmp
 # Make port 8080 available to the world outside this container
 EXPOSE 9000
 
-ADD ftp://dhaka:1234@192.168.0.104/roomtypes-service.jar
+ADD ftp://dhaka:1234@192.168.0.104/roomtypes-service.jar roomtypes-service.jar
 
 # The application's jar file
 #ARG JAR_FILE=roomtypes-service.jar
